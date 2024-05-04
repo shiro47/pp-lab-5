@@ -5,18 +5,27 @@ import company.utils.MathUtils;
 
 public class Main {
     public static void main(String[] args) {
-        int num1 = 11;
-        int num2 = 23;
+        Person[] people = new Person[5];
+        final int b = 10;
+
         try {
-            Person person = new Person("John", 30);
-            System.out.println("Name: " + person.getName());
-            System.out.println("Age: " + person.getAge());
+            people[0] = new Person("John Doe", 30); //Nie zrozumialem czy tu ma byc 5 razy John Doe, wiec daje rozne osoby
+            people[1] = new Person("Alice", 25);
+            people[2] = new Person("Bob", 40);
+            people[3] = new Person("Emily", 35);
+            people[4] = new Person("Michael", 28);
         } catch (InvalidAgeException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        int sum = MathUtils.add(num1, num2);
-        System.out.println(num1 + " + " + num2 + " = " + sum);
-        EmailMessenger emailMessenger = new EmailMessenger();
-        emailMessenger.sendMessage("Sum is: "+sum);
+
+        for (Person person : people) {
+            if (person != null) {
+                int age = person.getAge();
+                int value = MathUtils.add(age, b);
+                String message = "The value for " + person.getName() + " is: " + value;
+                EmailMessenger emailMessenger = new EmailMessenger();
+                emailMessenger.sendMessage(message);
+            }
+        }
     }
 }
